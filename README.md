@@ -15,6 +15,9 @@ A muchos estudiantes les resulta difícil encontrar compañeros con quienes estu
 La colaboración es una herramienta importante para el aprendizaje
 
 # 🎨 Paleta de colores
+<div align="center">
+    <img alt="Logo" src="./color-pallet.jpg" width="80%">
+</div>
 
 # 🚀 Como correrlo
 El proyecto se implemento usando Expo. Se tienen que correr los siguientes comandos:
