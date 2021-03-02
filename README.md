@@ -16,7 +16,7 @@ La colaboración es una herramienta importante para el aprendizaje
 
 # 🎨 Paleta de colores
 <div align="center">
-    <img alt="Logo" src="./color-pallet.jpg" width="80%">
+    <img alt="Logo" src="Color-pallet.jpg" width="80%">
 </div>
 
 # 🚀 Como correrlo
