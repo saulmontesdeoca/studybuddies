@@ -33,5 +33,5 @@ expo start
  - [Luis Antonio García](https://github.com/WichoGarcia)
  - [Saúl Montes De Oca](https://github.com/saulmontesdeoca)
  - [Diego Moreno Acevedo](https://github.com/DiegoMA1)
- - [Victor Coeto](https://github.com/DiegoMA1)
+ - [Victor Coeto](https://github.com/vcoeto)
  - [Juan Carlos Hurtado](https://github.com/DiegoMA1)
