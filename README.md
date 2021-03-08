@@ -29,6 +29,30 @@ npm install
 expo start
 ```
 
+ # Roadmap
+
+## Front-end:
+
+ * [ ] 1
+ * [ ] 2
+ * [ ] 3
+ * [ ] 4
+ * [ ] 5
+ * [ ] 6
+ * [ ] 7
+
+
+## Back-end:
+
+
+
+ * [ ] 1
+ * [ ] 2
+ * [ ] 3
+ * [ ] 4
+ * [ ] 6
+
+
 # 👏 Creadores
  - [Luis Antonio García](https://github.com/WichoGarcia)
  - [Saúl Montes De Oca](https://github.com/saulmontesdeoca)
