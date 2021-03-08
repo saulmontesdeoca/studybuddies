@@ -30,32 +30,56 @@ expo start
 ```
 
  # Roadmap
+ 
+## Febrero
+#### Front-end:
+#### Back-end:
+#### Otras actividades: 
 
-## Front-end:
-
- * [ ] 1
- * [ ] 2
- * [ ] 3
- * [ ] 4
- * [ ] 5
- * [ ] 6
- * [ ] 7
-
-
-## Back-end:
+ * [x] Formación del equipo.
+ * [x] Presentación de la idea.
+ * [x] Bocetos.
 
 
+## Marzo
+#### Front-end:
 
- * [ ] 1
- * [ ] 2
- * [ ] 3
- * [ ] 4
- * [ ] 6
+* [ ] Diseño de las cards.
+* [ ] Módulo de registro e inicio de sesión.
+
+#### Back-end:
+#### Otras actividades:
+
+ * [x] Roadmap.
+
+
+## Abril
+#### Front-end:
+* [ ] Implementación de las cards.
+* [ ] Módulo de matches.
+#### Back-end:
+* [ ] Base de datos.
+
+## Mayo
+#### Front-end:
+* [ ] Módulo de matches.
+* [ ] Módulo de chat.
+#### Back-end:
+* [ ] Base de datos.
+
+## Junio
+#### Front-end:
+* [ ] Pruebas finales.
+#### Back-end:
+* [ ] Pruebas finales.
+#### Otras actividades:
+* [ ] Diseño presentación final.
+* [ ] Entrega final.
 
 
 # 👏 Creadores
- - [Luis Antonio García](https://github.com/WichoGarcia)
- - [Saúl Montes De Oca](https://github.com/saulmontesdeoca)
- - [Diego Moreno Acevedo](https://github.com/DiegoMA1)
- - [Victor Coeto](https://github.com/vcoeto)
- - [Juan Carlos Hurtado](https://github.com/DiegoMA1)
+ - [Luis Antonio García](https://github.com/WichoGarcia) - Back-end
+ - [Saúl Montes De Oca](https://github.com/saulmontesdeoca) - Front-end
+ - [Diego Moreno Acevedo](https://github.com/DiegoMA1) - Front-end
+ - [Victor Coeto](https://github.com/vcoeto) - Back-end
+ - [Juan Carlos Hurtado](https://github.com/DiegoMA1) - Back-end.
