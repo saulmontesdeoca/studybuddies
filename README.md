@@ -39,7 +39,7 @@ expo start
  * [x] Formación del equipo.
  * [x] Presentación de la idea.
  * [x] Bocetos.
- * [x] Presentación.
+ * [x] Presentación
 
 
 ## Marzo
