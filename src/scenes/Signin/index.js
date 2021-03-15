@@ -28,6 +28,7 @@ const Signin = ({navigation}) => {
                     email,
                     fullName,
                 };
+                console.log("This is what firebase will receive, user:", data);
                 const usersRef = firebase.firestore().collection('users')
                 usersRef
                     .doc(uid)
