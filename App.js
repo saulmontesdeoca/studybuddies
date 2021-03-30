@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React , { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View, Button } from 'react-native';
@@ -7,10 +7,42 @@ import Feed from './src/scenes/Feed';
 import Login from './src/scenes/Login';
 import Signin from './src/scenes/Signin';
 import ChatRooms from './src/scenes/ChatRooms';
+import { firebase } from './src/firebase/config'
 
 const Stack = createStackNavigator();
-
+let loading = false;
 export default function App() {
+  const setLoading = (load) => {
+    loading = load
+  }
+
+  if (loading) {	
+    return (	
+      <></>	
+    )	
+  }
+
+  useEffect(() => {
+    const usersRef = firebase.firestore().collection('users');
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        usersRef
+          .doc(user.uid)
+          .get()
+          .then((document) => {
+            const userData = document.data()
+            setLoading(false)
+            setUser(userData)
+          })
+          .catch((error) => {
+            setLoading(false)
+          });
+      } else {
+        setLoading(false)
+      }
+    });
+  }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
