@@ -52,7 +52,7 @@ const Signin = ({navigation}) => {
                 keyboardShouldPersistTaps="always">
                 <Image
                     style={styles.logo}
-                    source={require('../../../assets/icon.png')}
+                    source={require('../../../assets/icon-1.png')}
                 />
                 <TextInput
                     style={styles.input}
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     logo: {
         flex: 1,
         height: 120,
-        width: 90,
+        width: 145,
         alignSelf: "center",
         margin: 30
     },
