@@ -6,19 +6,23 @@ import {
   Image,
 } from 'react-native';
 
+import { FontAwesome5 } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons'; 
+
 export default class Profile extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    let currentUser = this.props.route.params.user
+    let currentUser = this.props.user;
     console.log(currentUser);
     return (
       <View style={styles.container}>
           <View style={styles.header}>
             <View style={styles.headerContent}>
                 <Image style={styles.avatar}
-                  source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
+                  source={{uri: 'https://avatars.githubusercontent.com/u/31284834?s=400&u=63898bb74fbe573a34c33b288a089443cbbe3c28&v=4'}}/>
 
                 <Text style={styles.name}> {currentUser.fullName} </Text>
                 <Text style={styles.userInfo}>{currentUser.email} </Text>
@@ -29,7 +33,7 @@ export default class Profile extends Component {
           <View style={styles.body}>
             <View style={styles.item}>
               <View style={styles.iconContent}>
-                <Image style={styles.icon} source={{uri: 'https://img.icons8.com/color/70/000000/cottage.png'}}/>
+                <Entypo name="home" size={30} color="black" />
               </View>
               <View style={styles.infoContent}>
                 <Text style={styles.info}>Home</Text>
@@ -38,7 +42,7 @@ export default class Profile extends Component {
 
             <View style={styles.item}>
               <View style={styles.iconContent}>
-                <Image style={styles.icon} source={{uri: 'https://img.icons8.com/color/70/000000/administrator-male.png'}}/>
+                <Ionicons name="settings-outline" size={30} color="black" />
               </View>
               <View style={styles.infoContent}>
                 <Text style={styles.info}>Settings</Text>
@@ -47,22 +51,12 @@ export default class Profile extends Component {
 
             <View style={styles.item}>
               <View style={styles.iconContent}>
-                <Image style={styles.icon} source={{uri: 'https://img.icons8.com/color/70/000000/filled-like.png'}}/>
+              <FontAwesome5 name="book-reader" size={30} color="black" />
               </View>
               <View style={styles.infoContent}>
-                <Text style={styles.info}>News</Text>
+                <Text style={styles.info}>Subjects</Text>
               </View>
             </View>
-
-            <View style={styles.item}>
-              <View style={styles.iconContent}>
-                <Image style={styles.icon} source={{uri: 'https://img.icons8.com/color/70/000000/facebook-like.png'}}/>
-              </View>
-              <View style={styles.infoContent}>
-                <Text style={styles.info}>Shop</Text>
-              </View>
-            </View>
-
           </View>
       </View>
     );
@@ -70,8 +64,16 @@ export default class Profile extends Component {
 }
 
 const styles = StyleSheet.create({
+
   header:{
-    backgroundColor: "#DCDCDC",
+    backgroundColor: "#ffffff",
+    borderRadius: 40,
+    borderColor: '#000000',
+    width: 340,
+    marginTop: 10,
+    marginRight: 'auto',
+    marginBottom: 10,
+    marginLeft: 'auto',
   },
   headerContent:{
     padding:30,
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     height: 130,
     borderRadius: 63,
     borderWidth: 4,
-    borderColor: "white",
+    borderColor: "#C26DBC",
     marginBottom:10,
   },
   name:{
@@ -96,12 +98,21 @@ const styles = StyleSheet.create({
     fontWeight:'600',
   },
   body:{
-    backgroundColor: "#778899",
-    height:500,
+    backgroundColor: "#C8F4F9",
+    height: 500,
     alignItems:'center',
+    borderRadius: 30,
+    height: 450,
+    width: 340,
+    marginTop: 0,
+    marginRight: 'auto',
+    marginBottom: 0,
+    marginLeft: 'auto',
   },
   item:{
     flexDirection : 'row',
+    height: 50,
+    alignItems: 'center',
   },
   infoContent:{
     flex:1,
@@ -110,16 +121,14 @@ const styles = StyleSheet.create({
   },
   iconContent:{
     flex:1,
-    alignItems:'flex-end',
+    alignItems:'flex-start',
   },
   icon:{
     width:30,
     height:30,
-    marginTop:20,
   },
   info:{
     fontSize:18,
-    marginTop:20,
-    color: "#FFFFFF",
+    color: "#000000",
   }
 });
