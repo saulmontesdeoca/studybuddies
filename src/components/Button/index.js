@@ -11,7 +11,6 @@ export default Button;
 const styles = StyleSheet.create({
     appButtonContainer: {
       elevation: 8,
-      backgroundColor: "#fff",
       borderWidth: 1,
       borderColor: '#009688',
       borderRadius: 100,

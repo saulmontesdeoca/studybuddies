@@ -2,6 +2,10 @@ import React from 'react';
 import { Text, View , StyleSheet, Image, ImageBackground} from 'react-native';
 import Button from '../../components/Button'
 import { LinearGradient } from 'expo-linear-gradient';
+import { Dimensions } from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const Welcome = ({ navigation }) => {
     return (
@@ -12,13 +16,13 @@ const Welcome = ({ navigation }) => {
             <Image
                     style={styles.logo}
                     source={require('../../../assets/logo-short.png')}
-                />
+            />
             <ImageBackground
                 style={styles.fadingImage}
                 source={require('../../../assets/welcome.jpg')}
             >
                 <LinearGradient 
-                    colors={['rgba(255,255,255,1)', 'rgba(255,255,255,0.96)', 'rgba(255,255,255,0.74)', 'rgba(255,255,255,0)','transparent']}
+                    colors={['rgba(255,255,255,1)', 'rgba(255,255,255,0.912)','rgba(255,255,255,0.09)','rgba(255,255,255,0.09)','rgba(255,255,255,0.09)', 'rgba(255,255,255,0)','transparent']}
                     style={styles.gradient}
                 />
                 <View style={styles.buttonContainer}>
@@ -55,11 +59,14 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     title: {
-        fontSize: 34
+        fontWeight: "bold",
+        fontSize: 42,
+        color: '#4E4E4E',
     },
     containerTitle: {
         margin: 20,
-        marginTop: 70
+        marginBottom: 15,
+        marginTop: windowHeight/9
     },
     containerBottom: {
         flex:1,
@@ -73,13 +80,13 @@ const styles = StyleSheet.create({
         right: 0,
         top: 0,
         height: '100%',
-      },
-      button: {
+    },
+    button: {
         width: 120,
         marginTop: 15,
         marginRight: 30
-      },
-      buttonContainer: {
+    },
+    buttonContainer: {
         flexDirection: 'row-reverse',
-      }
+    }
 });
