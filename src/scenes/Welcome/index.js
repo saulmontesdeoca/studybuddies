@@ -19,7 +19,6 @@ const Welcome = ({ navigation }) => {
             >
                 <LinearGradient 
                     colors={['rgba(255,255,255,1)', 'rgba(255,255,255,0.96)', 'rgba(255,255,255,0.74)', 'rgba(255,255,255,0)','transparent']}
-                    // start={[]}
                     style={styles.gradient}
                 />
                 <View style={styles.buttonContainer}>
@@ -48,12 +47,11 @@ const styles = StyleSheet.create({
     headerContainer: {
         flex: 1,
         marginHorizontal: 20,
-        backgroundColor: 'red'   
     },
     logo: {
         flex: 1,
         width: null,
-        maxHeight: 100,
+        maxHeight: 85,
         marginHorizontal: 20,
     },
     title: {
@@ -68,7 +66,6 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
         alignSelf:'stretch',
-        backgroundColor: 'blue'   
     },
     gradient: {
         position: 'absolute',
