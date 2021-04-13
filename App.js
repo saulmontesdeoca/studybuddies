@@ -7,11 +7,21 @@ import Feed from './src/scenes/Feed';
 import Login from './src/scenes/Login';
 import Signin from './src/scenes/Signin';
 import ChatRooms from './src/scenes/ChatRooms';
-import { firebase } from './src/firebase/config'
+import Profile from './src/scenes/Profile';
+import { firebase } from './src/firebase/config';
+
+/*
+Paleta de colores
+Lila #EEB5EB
+Orchid #C26DBC
+Turquoise #C8F4F9
+Blue green #3CACAE
+*/
 
 const Stack = createStackNavigator();
 let loading = false;
 export default function App() {
+  const [userDB, setUser] = useState('')
   const setLoading = (load) => {
     loading = load
   }
@@ -50,6 +60,9 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signin" component={Signin} />
         <Stack.Screen name="ChatRooms" component={ChatRooms} />
+        <Stack.Screen name="Profile">
+          {props => <Profile {...props} user={userDB} />}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

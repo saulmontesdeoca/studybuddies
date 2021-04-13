@@ -52,7 +52,7 @@ const Signin = ({navigation}) => {
                 keyboardShouldPersistTaps="always">
                 <Image
                     style={styles.logo}
-                    source={require('../../../assets/icon.png')}
+                    source={require('../../../assets/logo.png')}
                 />
                 <TextInput
                     style={styles.input}
@@ -101,7 +101,6 @@ const Signin = ({navigation}) => {
                     <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
                 </View>
             </KeyboardAwareScrollView>
-            <Button title="Go back" onPress={() => navigation.goBack()} />
         </View>
     );
 };
@@ -116,9 +115,10 @@ const styles = StyleSheet.create({
     logo: {
         flex: 1,
         height: 120,
-        width: 90,
+        width: 180,
         alignSelf: "center",
-        margin: 30
+        margin: 30,
+        borderRadius: 15,
     },
     input: {
         height: 48,
@@ -132,14 +132,14 @@ const styles = StyleSheet.create({
         paddingLeft: 16
     },
     button: {
-        backgroundColor: '#788eec',
+        backgroundColor: '#C26DBC',
         marginLeft: 30,
         marginRight: 30,
         marginTop: 20,
         height: 48,
         borderRadius: 5,
         alignItems: "center",
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     buttonTitle: {
         color: 'white',
@@ -149,14 +149,14 @@ const styles = StyleSheet.create({
     footerView: {
         flex: 1,
         alignItems: "center",
-        marginTop: 20
+        marginTop: 20,
     },
     footerText: {
         fontSize: 16,
-        color: '#2e2e2d'
+        color: '#C26DBC'
     },
     footerLink: {
-        color: "#788eec",
+        color: "#3CACAE",
         fontWeight: "bold",
         fontSize: 16
     },

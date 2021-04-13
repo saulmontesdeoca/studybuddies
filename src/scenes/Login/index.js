@@ -27,6 +27,7 @@ const Login = ({ navigation }) => {
                             return;
                         }
                         const user = firestoreDocument.data()
+                        console.log("Everything ok, come in Sir")
                         navigation.navigate('Feed', {user})
                     })
                     .catch(error => {
@@ -40,13 +41,12 @@ const Login = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Text>Login</Text>
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
                 <Image
                     style={styles.logo}
-                    source={require('../../../assets/icon.png')}
+                    source={require('../../../assets/logo.png')}
                 />
                 <TextInput
                     style={styles.input}
@@ -76,12 +76,19 @@ const Login = ({ navigation }) => {
                     <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
                 </View>
             </KeyboardAwareScrollView>
-            <Button title="Go back" onPress={() => navigation.goBack()} />
         </View>
     );
 };
 
 export default Login;
+
+/*
+Paleta de colores
+Lila #EEB5EB
+Orchid #C26DBC
+Turquoise #C8F4F9
+Blue green #3CACAE
+*/
 
 const styles = StyleSheet.create({
     container: {
@@ -91,9 +98,10 @@ const styles = StyleSheet.create({
         logo: {
             flex: 1,
             height: 120,
-            width: 90,
+            width: 180,
             alignSelf: "center",
-            margin: 30
+            margin: 30,
+            borderRadius: 15,
         },
         input: {
             height: 48,
@@ -107,14 +115,14 @@ const styles = StyleSheet.create({
             paddingLeft: 16
         },
         button: {
-            backgroundColor: '#788eec',
+            backgroundColor: '#C26DBC',
             marginLeft: 30,
             marginRight: 30,
             marginTop: 20,
             height: 48,
             borderRadius: 5,
             alignItems: "center",
-            justifyContent: 'center'
+            justifyContent: 'center',
         },
         buttonTitle: {
             color: 'white',
@@ -124,14 +132,14 @@ const styles = StyleSheet.create({
         footerView: {
             flex: 1,
             alignItems: "center",
-            marginTop: 20
+            marginTop: 20,
         },
         footerText: {
             fontSize: 16,
-            color: '#2e2e2d'
+            color: '#C26DBC'
         },
         footerLink: {
-            color: "#788eec",
+            color: "#3CACAE",
             fontWeight: "bold",
             fontSize: 16
         },
