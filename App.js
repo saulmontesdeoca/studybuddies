@@ -7,13 +7,15 @@ import Feed from './src/scenes/Feed';
 import Login from './src/scenes/Login';
 import Signin from './src/scenes/Signin';
 import ChatRooms from './src/scenes/ChatRooms';
+import Welcome from './src/scenes/Welcome';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator headerMode="none">
+        <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="Feed" component={Feed}/>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signin" component={Signin} />
