@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
-import { Image, Text, TextInput, TouchableOpacity, View, StyleSheet, Button } from 'react-native'
+import { Image, Text, TextInput, TouchableOpacity, View, StyleSheet, SafeAreaView } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { firebase } from '../../firebase/config';
+import { Dimensions } from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const Signin = ({navigation}) => {
     const [fullName, setFullName] = useState('')
@@ -46,52 +50,57 @@ const Signin = ({navigation}) => {
     }
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
-                <Image
-                    style={styles.logo}
-                    source={require('../../../assets/logo.png')}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder='Full Name'
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setFullName(text)}
-                    value={fullName}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder='E-mail'
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setEmail(text)}
-                    value={email}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    placeholder='Password'
-                    onChangeText={(text) => setPassword(text)}
-                    value={password}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    placeholder='Confirm Password'
-                    onChangeText={(text) => setConfirmPassword(text)}
-                    value={confirmPassword}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
+                <Text style={styles.salute}>Get Started</Text>
+                <View style={styles.shadow}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Full Name'
+                        placeholderTextColor="#aaaaaa"
+                        onChangeText={(text) => setFullName(text)}
+                        value={fullName}
+                        underlineColorAndroid="transparent"
+                        autoCapitalize="none"
+                    />
+                </View>
+                <View style={styles.shadow}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='E-mail'
+                        placeholderTextColor="#aaaaaa"
+                        onChangeText={(text) => setEmail(text)}
+                        value={email}
+                        underlineColorAndroid="transparent"
+                        autoCapitalize="none"
+                    />
+                </View>
+                <View style={styles.shadow}>
+                    <TextInput
+                        style={styles.input}
+                        placeholderTextColor="#aaaaaa"
+                        secureTextEntry
+                        placeholder='Password'
+                        onChangeText={(text) => setPassword(text)}
+                        value={password}
+                        underlineColorAndroid="transparent"
+                        autoCapitalize="none"
+                    />
+                </View>
+                <View style={styles.shadow}>
+                    <TextInput
+                        style={styles.input}
+                        placeholderTextColor="#aaaaaa"
+                        secureTextEntry
+                        placeholder='Confirm Password'
+                        onChangeText={(text) => setConfirmPassword(text)}
+                        value={confirmPassword}
+                        underlineColorAndroid="transparent"
+                        autoCapitalize="none"
+                    />
+                </View>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onRegisterPress()}>
@@ -101,7 +110,7 @@ const Signin = ({navigation}) => {
                     <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
                 </View>
             </KeyboardAwareScrollView>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -111,25 +120,29 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-    },
-    logo: {
-        flex: 1,
-        height: 120,
-        width: 180,
-        alignSelf: "center",
-        margin: 30,
-        borderRadius: 15,
-    },
+        backgroundColor: '#fff',
+        justifyContent: 'center'    },
     input: {
         height: 48,
-        borderRadius: 5,
+        borderRadius: 100,
         overflow: 'hidden',
         backgroundColor: 'white',
         marginTop: 10,
         marginBottom: 10,
         marginLeft: 30,
         marginRight: 30,
-        paddingLeft: 16
+        paddingLeft: 24,
+    },
+    shadow: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 6,
+        },
+        shadowOpacity: 0.39,
+        shadowRadius: 8.30,
+        
+        elevation: 13,
     },
     button: {
         backgroundColor: '#C26DBC',
@@ -137,7 +150,7 @@ const styles = StyleSheet.create({
         marginRight: 30,
         marginTop: 20,
         height: 48,
-        borderRadius: 5,
+        borderRadius: 100,
         alignItems: "center",
         justifyContent: 'center',
     },
@@ -156,9 +169,16 @@ const styles = StyleSheet.create({
         color: '#C26DBC'
     },
     footerLink: {
-        color: "#3CACAE",
+        color: "#4E4E4E",
         fontWeight: "bold",
         fontSize: 16
     },
+    salute: {
+        fontWeight: "bold",
+        fontSize: 42,
+        color: '#4E4E4E',
+        margin: 30,
+        marginTop: windowHeight/9
+    }
 });
   
