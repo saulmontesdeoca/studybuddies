@@ -10,6 +10,7 @@ import ChatRooms from './src/scenes/ChatRooms';
 import Welcome from './src/scenes/Welcome';
 import Profile from './src/scenes/Profile';
 import { firebase } from './src/firebase/config';
+import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 /*
 Paleta de colores

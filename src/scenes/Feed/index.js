@@ -1,9 +1,69 @@
 import React , { useEffect, useState } from 'react';
-import { Text, View , StyleSheet, Button} from 'react-native';
+import { Text, View , StyleSheet, Button, SafeAreaView} from 'react-native';
 import { firebase } from '../../firebase/config';
+import SwipeCards from '../../components/SwipeCard';
+import { Dimensions } from 'react-native';
+
+const windowHeight = Dimensions.get('window').height;
 
 const Feed = ({ navigation }) => {
-
+    const state = {
+        user: {
+          id: '1',
+          name: 'Saul',
+          yup: [],
+          nope: [],
+          matches: [],
+        },
+        cards: [
+          {
+            id: '2',
+            name: 'Remi, CS50',
+            imgUrl:
+              'https://image.freepik.com/foto-gratis/adorable-estudiante-cabello-rizado-viste-camiseta-blanca-informal-mono-sostiene-bloc-notas-o-libro-texto_95891-107.jpg',
+            description:
+              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+          },
+          {
+            id: '3',
+            name: 'Nana Mathis',
+            imgUrl:
+              'https://www.arenasimulation.com/public/uploads/images/general/studentpic1.png',
+            description:
+              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+          },
+          {
+            id: '4',
+            name: 'Saul Montes De Oca',
+            imgUrl:
+              'https://s.libertaddigital.com/2019/08/15/estudiante-biblioteca-libros.jpg',
+            description:
+              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+          },
+          {
+            id: '5',
+            name: 'Nathan Moeliono',
+            imgUrl:
+              'https://rogersbh.org/application/files/thumbnails/small/2815/3632/7168/podcastblog2.jpg',
+            description:
+              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+          },
+          {
+            id: '6',
+            name: 'Sincerely Brittaney',
+            imgUrl: 'https://thispersondoesnotexist.com/image',
+            description:
+              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+          },
+          {
+            id: '7',
+            name: 'Shivay Lamba',
+            imgUrl: 'https://thispersondoesnotexist.com/image',
+            description:
+              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+          },
+        ],
+      };
     let loading = false;
     const [userDB, setUser] = useState('')
     const setLoading = (load) => {
@@ -38,17 +98,26 @@ const Feed = ({ navigation }) => {
         )	
     }
     return (
-        <View style={styles.container}> 
-            <Text>Feed</Text>
-            <Button title="Go to Signin" onPress={() => navigation.navigate('Signin')} />
+        <SafeAreaView style={styles.container}> 
+            <View style={styles.containerTitle}>
+                <Text style={styles.title}>Descubre 👾</Text>
+            </View>
+            <View style={styles.deckContainer}>
+                <SwipeCards buddies={state.cards} user={state.userDB}/>
+            </View>
+            <View style={styles.buttonsArea}>
+                <Text style={styles.title}>Buttons 👾</Text>
+
+            </View>
+            {/* <Button title="Go to Signin" onPress={() => navigation.navigate('Signin')} />
             <Button title="Go to Login" onPress={() => navigation.navigate('Login')} />
             <Button title="Go to ChatRooms" onPress={() => navigation.navigate('ChatRooms')} />
             <Button title="Go to Profile" onPress={() => navigation.navigate('Profile',
             {
             user: userDB,
             }
-            )}/>
-        </View>
+            )}/> */}
+        </SafeAreaView>
     );
 };
 
@@ -56,10 +125,27 @@ export default Feed;
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+        flex: 1,
+        flexDirection: "column"
     },
+    buttonsArea:{
+        flex:1,
+        // backgroundColor: "blue"
+
+    },
+    title: {
+        fontWeight: "bold",
+        fontSize: 42,
+        color: '#4E4E4E',
+    },
+    containerTitle: {
+        flex:1,
+        // marginLeft: 20,
+        // backgroundColor: "green"
+    },
+    deckContainer: {
+        flex: 8,
+        // backgroundColor: "red"
+    }
 });
   

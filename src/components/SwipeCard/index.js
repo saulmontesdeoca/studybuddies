@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
-
+import { Dimensions } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
+
+const windowHeight = Dimensions.get('window').height;
+const windowWidth = Dimensions.get('window').width;
+
 
 class Card extends React.Component {
   constructor(props) {
     super(props);
   }
-
+ 
   render() {
     return (
       <View style={styles.card}>
@@ -69,7 +73,6 @@ export default class extends React.Component {
         cards={this.props.buddies}
         renderCard={(cardData) => <Card {...cardData} />}
         renderNoMoreCards={() => <NoMoreCards />}
-        
         handleYup={this.handleYup}
         handleNope={this.handleNope}
       />
@@ -78,15 +81,15 @@ export default class extends React.Component {
 }
 const styles = StyleSheet.create({
   card: {
-    width: 400,
-    height: 600,
+    width: windowWidth/1.1,
+    height:  windowHeight/1.4,
     borderColor: 'grey',
     borderRadius: 20,
-    backgroundColor: '#F6F5F4',
+    backgroundColor: 'rgba(52, 52, 52, 0.4)',
     overflow: 'hidden',
     shadowOffset: {  width: 10,  height: 10,  },
     shadowColor: 'black',
-    shadowOpacity: 1.0
+    shadowOpacity: 1.0,
 },
  cardText: {
     fontSize: 16
@@ -103,7 +106,8 @@ const styles = StyleSheet.create({
   },
   cardFooter: {
       paddingLeft: 20,
-      paddingTop: 20,
-      paddingRight:20
+      paddingTop: 30,
+      paddingRight:20,
+      backgroundColor: '#fff'
   }
 })

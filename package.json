@@ -13,6 +13,7 @@
     "@react-navigation/stack": "^5.14.3",
     "base-64": "^1.0.0",
     "expo": "^40.0.1",
+    "expo-linear-gradient": "~8.4.0",
     "expo-status-bar": "~1.0.3",
     "firebase": "^8.3.0",
     "react": "16.13.1",
@@ -23,8 +24,8 @@
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.9",
     "react-native-screens": "~2.15.2",
+    "react-native-swipe-cards": "^0.1.1",
     "react-native-web": "~0.13.12",
-    "expo-linear-gradient": "~8.4.0",
     "yarn": "^1.22.10"
   },
   "devDependencies": {
