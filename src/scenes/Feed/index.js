@@ -113,6 +113,7 @@ const Feed = ({ navigation }) => {
       }
       const [carrerContent, setCarrerContent] = useState(true);
       const [topicContent, setTopicContent] = useState(false);
+      const [showCard, setCards] = useState(false);
       const toggleModal = () => {
           setCarrerContent(false);
           setTopicContent(true);
@@ -120,6 +121,7 @@ const Feed = ({ navigation }) => {
   
       const toggle = () => {
           setTopicContent(false);
+          setCards(true);
       };
   
       const action = (item) => {
@@ -162,52 +164,7 @@ const Feed = ({ navigation }) => {
       }
       
       const openModals = () => {
-        <View style={styles.centeredView}>
-                { carrerContent ?
-                <Modal animationType="slide" transparent={false} isVisible={carrerContent}> 
-                    <View style={styles.centeredView} >
-                        <View style={styles.modalView}>
-                            <Text style={styles.modalText}>Primero queremos saber que carrera estas estudiando</Text>
-                            <Text style={{fontSize:18}}>Selecciona tu carrera</Text>
-                            <View style={styles.container}>
-                                <FlatList
-                                    data={carrersKeys}
-                                    renderItem={_renderList} />
-                            </View>
-                            <Text style={{fontSize:20}}>Has seleccionado: {selectedCarrer}</Text>
-                            <Pressable
-                            style={[styles.button, styles.buttonClose]}
-                            onPress={toggleModal}
-                            >
-                            <Text style={styles.textStyle}>Continuar</Text>
-                            </Pressable>
-                        </View>
-                    </View>
-                </Modal>: console.log("Closing modal")}
-                { topicContent ? 
-                <Modal animationType="slide" transparent={false} isVisible={topicContent}> 
-                    <View style={styles.centeredView} >
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Ahora cuentanos que materias estas cursando este semestre</Text>
-                        <Text style={{fontSize:18}}>Selecciona tus materias</Text>
-                        <View style={styles.container}>
-                            <FlatList
-                                data={topicKeys}
-                                renderItem={_renderTopicList} />
-                        </View>
-                        <Text style={{fontSize:20}}>Tus materias:</Text>
-                        {selectedTopics.map(topic => {<Text>{topic}</Text>})}
-                        <Pressable
-                        style={[styles.button, styles.buttonClose]}
-                        onPress={toggle}
-                        >
-                        <Text style={styles.textStyle}>Continuar</Text>
-                        </Pressable>
-                    </View>
-                </View>
-                </Modal>: console.log("Closing carrers modal")}
-            <Button title="Show Modal" onPress={toggle} />
-        </View>
+        console.log("CarrerContent ", carrerContent);
     }
 
       useEffect(() => {
@@ -248,17 +205,64 @@ const Feed = ({ navigation }) => {
     }
     return (
         <SafeAreaView style={styles.container}>
-            {openModals()}
-            <View style={styles.containerTitle}>
-                {/* <Text style={styles.title}>Descubre 👾</Text> */}
-                <HeadNav/>
-            </View>
-            <View style={styles.deckContainer}>
-                <SwipeCards buddies={state.cards} user={state.userDB}/>
-            </View>
-            <View style={styles.buttonsArea}>
-                <Text style={styles.title}></Text>
-            </View>
+<View style={styles.centeredView}>
+                { carrerContent ?
+                <Modal animationType="slide" transparent={false} isVisible={carrerContent}> 
+                    <View style={styles.centeredView} >
+                        <View style={styles.modalView}>
+                            <Text style={styles.modalText}>Primero queremos saber que carrera estas estudiando</Text>
+                            <Text style={{fontSize:18}}>Selecciona tu carrera</Text>
+                            <View style={styles.container}>
+                                <FlatList
+                                    data={carrersKeys}
+                                    renderItem={_renderList} />
+                            </View>
+                            <Text style={{fontSize:20}}>Has seleccionado: {selectedCarrer}</Text>
+                            <Pressable
+                            style={[styles.button, styles.buttonClose]}
+                            onPress={toggleModal}
+                            >
+                            <Text style={styles.textStyle}>Continuar</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>: console.log("Closing modal")}
+                { topicContent ? 
+                <Modal animationType="slide" transparent={false} isVisible={topicContent}> 
+                <View style={styles.centeredView} >
+                    <View style={styles.modalView}>
+                        <Text style={styles.modalText}>Ahora cuentanos que materias estas cursando este semestre</Text>
+                        <Text style={{fontSize:18}}>Selecciona tus materias</Text>
+                        <View style={styles.container}>
+                            <FlatList
+                                data={topicKeys}
+                                renderItem={_renderTopicList} />
+                        </View>
+                        <Text style={{fontSize:20}}>Tus materias:</Text>
+                        {selectedTopics.map(topic => {<Text>{topic}</Text>})}
+                        <Pressable
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={toggle}
+                        >
+                        <Text style={styles.textStyle}>Continuar</Text>
+                        </Pressable>
+                    </View>
+                    </View>
+                </Modal>: console.log("Closing carrers modal")}
+                </View>
+            {showCard ? 
+            <View>
+                <View style={styles.containerTitle}>
+                    {/* <Text style={styles.title}>Descubre 👾</Text> */}
+                    <HeadNav/>
+                </View>
+                <View style={styles.deckContainer}>
+                    <SwipeCards buddies={state.cards} user={state.userDB}/>
+                </View>
+                <View style={styles.buttonsArea}>
+                    <Text style={styles.title}></Text>
+                </View>
+            </View>: console.log("showing modal")}
         </SafeAreaView>
     );
 };
@@ -288,6 +292,59 @@ const styles = StyleSheet.create({
     deckContainer: {
         flex: 8,
         // backgroundColor: "red"
-    }
+    },
+        centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+    title: {
+        fontSize: 30,
+        fontWeight: 'bold'
+    },
+    item: {
+        padding: 10,
+        fontSize: 18,
+        height: 44,
+    },
+    modalView: {
+        width: '100%',
+        height: '100%',
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+      },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2
+    },
+    buttonOpen: {
+        backgroundColor: "#F194FF",
+    },
+    buttonClose: {
+        backgroundColor: "#2196F3",
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center",
+        fontSize: 25
+    },
 });
   

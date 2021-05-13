@@ -23,6 +23,7 @@ Blue green #3CACAE
 const Stack = createStackNavigator();
 let loading = false;
 export default function App() {
+  const [showMe, setShow] = useState(true);
   const [userDB, setUser] = useState('')
   const setLoading = (load) => {
     loading = load
@@ -45,6 +46,7 @@ export default function App() {
             const userData = document.data()
             setLoading(false)
             setUser(userData)
+            setShow(false)
           })
           .catch((error) => {
             setLoading(false)
@@ -63,7 +65,7 @@ export default function App() {
             // headerStyle: { elevation: 0 },
             cardStyle: { backgroundColor: '#fff' }
         }}>
-        <Stack.Screen name="Welcome" component={Welcome} />
+        {showMe ? <Stack.Screen name="Welcome" component={Welcome} /> : console.log("Already login")}
         <Stack.Screen name="Feed" component={Feed}/>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signin" component={Signin} />
