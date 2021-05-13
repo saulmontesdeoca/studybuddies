@@ -1,10 +1,44 @@
+import { Text, View , StyleSheet, Button, Pressable, FlatList, TouchableWithoutFeedback, SafeAreaView} from 'react-native';
+import Modal from 'react-native-modal';
 import React , { useEffect, useState } from 'react';
-import { Text, View , StyleSheet, Button, SafeAreaView} from 'react-native';
 import { firebase } from '../../firebase/config';
 import SwipeCards from '../../components/SwipeCard';
 import { Dimensions } from 'react-native';
 import HeadNav from '../../components/HeadNav';
 const windowHeight = Dimensions.get('window').height;
+
+let carrers = [];
+let carrersKeys= [];
+let topicKeys = [];
+let selectedTopics= []
+const getCarrers = async () => {
+    const response = firebase.firestore().collection('carrers');
+    const data = await response.get();
+    data.docs.forEach((item)=>{
+        let obj = {
+            key: item.data().name
+        }
+        carrersKeys.push(obj);
+        carrers.push(item.data());
+    })
+    console.log("carrers:", carrers);
+}
+
+const getTopics = (carrer) => {
+    topicKeys = [];
+    carrers.forEach(c => {
+        if(c.name == carrer){
+            c.topics.forEach(topic => {
+                let obj = {
+                    key: topic,
+                    active: false
+                }
+                topicKeys.push(obj);
+            })
+        }
+    })
+    console.log(topicKeys);
+}
 
 const Feed = ({ navigation }) => {
     const state = {
@@ -70,33 +104,142 @@ const Feed = ({ navigation }) => {
           },
         ],
       };
-    let loading = false;
-    const [userDB, setUser] = useState('')
-    const setLoading = (load) => {
-    loading = load
+
+      let loading = false;
+      const [userDB, setUser] = useState('')
+      const [selectedCarrer,setSelected] = useState('');
+      const setLoading = (load) => {
+      loading = load
+      }
+      const [carrerContent, setCarrerContent] = useState(true);
+      const [topicContent, setTopicContent] = useState(false);
+      const toggleModal = () => {
+          setCarrerContent(false);
+          setTopicContent(true);
+      };
+  
+      const toggle = () => {
+          setTopicContent(false);
+      };
+  
+      const action = (item) => {
+          console.log('Selected Item :',item);
+          setSelected(item);
+          getTopics(item);
+      }
+  
+      const addTopic = (topic) => {
+          console.log(topic);
+          selectedTopics.push(topic);
+          console.log(selectedTopics);
+          topicKeys.forEach((t, index) => {
+              if(t.key == topic){
+                  topicKeys[index].active = true;
+              }
+          })
+          console.log(topicKeys);
+      }
+  
+      const _renderList = ({ item }) => {
+          return (
+           <TouchableWithoutFeedback onPress={() => action(item.key)}>
+              <View style={styles.listContainer}>
+                  <Text style={styles.item} >{item.key}</Text>
+              </View>
+           </TouchableWithoutFeedback>
+          );
+      
+      }
+  
+      const _renderTopicList = ({ item, index }) => {
+          return (
+           <TouchableWithoutFeedback onPress={() => addTopic(item.key)}>
+              <View style={styles.listContainer}>
+                  <Text style={styles.item} >{item.key}</Text>
+              </View>
+           </TouchableWithoutFeedback>
+          );
+      }
+      
+      const openModals = () => {
+        <View style={styles.centeredView}>
+                { carrerContent ?
+                <Modal animationType="slide" transparent={false} isVisible={carrerContent}> 
+                    <View style={styles.centeredView} >
+                        <View style={styles.modalView}>
+                            <Text style={styles.modalText}>Primero queremos saber que carrera estas estudiando</Text>
+                            <Text style={{fontSize:18}}>Selecciona tu carrera</Text>
+                            <View style={styles.container}>
+                                <FlatList
+                                    data={carrersKeys}
+                                    renderItem={_renderList} />
+                            </View>
+                            <Text style={{fontSize:20}}>Has seleccionado: {selectedCarrer}</Text>
+                            <Pressable
+                            style={[styles.button, styles.buttonClose]}
+                            onPress={toggleModal}
+                            >
+                            <Text style={styles.textStyle}>Continuar</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>: console.log("Closing modal")}
+                { topicContent ? 
+                <Modal animationType="slide" transparent={false} isVisible={topicContent}> 
+                    <View style={styles.centeredView} >
+                    <View style={styles.modalView}>
+                        <Text style={styles.modalText}>Ahora cuentanos que materias estas cursando este semestre</Text>
+                        <Text style={{fontSize:18}}>Selecciona tus materias</Text>
+                        <View style={styles.container}>
+                            <FlatList
+                                data={topicKeys}
+                                renderItem={_renderTopicList} />
+                        </View>
+                        <Text style={{fontSize:20}}>Tus materias:</Text>
+                        {selectedTopics.map(topic => {<Text>{topic}</Text>})}
+                        <Pressable
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={toggle}
+                        >
+                        <Text style={styles.textStyle}>Continuar</Text>
+                        </Pressable>
+                    </View>
+                </View>
+                </Modal>: console.log("Closing carrers modal")}
+            <Button title="Show Modal" onPress={toggle} />
+        </View>
     }
 
-    useEffect(() => {
-    const usersRef = firebase.firestore().collection('users');
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-        usersRef
-            .doc(user.uid)
-            .get()
-            .then((document) => {
-            const userData = document.data()
-            setLoading(false)
-            setUser(userData)
-            console.log(userData)
-            })
-            .catch((error) => {
-            setLoading(false)
-            });
-        } else {
-        setLoading(false)
-        }
-    });
-    }, []);
+      useEffect(() => {
+          getCarrers()
+          const usersRef = firebase.firestore().collection('users');
+          firebase.auth().onAuthStateChanged(user => {
+              if (user) {
+              usersRef
+                  .doc(user.uid)
+                  .get()
+                  .then((document) => {
+                      const userData = document.data()
+                      setLoading(false)
+                      setUser(userData)
+                      console.log(userData)
+                      if(userData.showTopics == undefined || userData.showTopics){
+                          console.log("Show modal")
+                          console.log(userData.showTopics)
+                          setCarrerContent(true);
+                      }
+                      else{
+                          setCarrerContent(false);
+                      }
+                  })
+                  .catch((error) => {
+                  setLoading(false)
+                  });
+              } else {
+              setLoading(false)
+              }
+          });
+      }, []);
 
     if (loading) {	
         return (	
@@ -104,7 +247,8 @@ const Feed = ({ navigation }) => {
         )	
     }
     return (
-        <SafeAreaView style={styles.container}> 
+        <SafeAreaView style={styles.container}>
+            {openModals()}
             <View style={styles.containerTitle}>
                 {/* <Text style={styles.title}>Descubre 👾</Text> */}
                 <HeadNav/>
