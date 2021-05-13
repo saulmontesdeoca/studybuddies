@@ -65,7 +65,7 @@ export default function App() {
             // headerStyle: { elevation: 0 },
             cardStyle: { backgroundColor: '#fff' }
         }}>
-        {showMe ? <Stack.Screen name="Welcome" component={Welcome} /> : console.log("Already login")}
+        {showMe ? <Stack.Screen name="Welcome" component={Welcome} /> : <Stack.Screen name="Welcome" component={Welcome} />}
         <Stack.Screen name="Feed" component={Feed}/>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signin" component={Signin} />
