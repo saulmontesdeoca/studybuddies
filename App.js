@@ -10,6 +10,7 @@ import ChatRooms from './src/scenes/ChatRooms';
 import Welcome from './src/scenes/Welcome';
 import Profile from './src/scenes/Profile';
 import { firebase } from './src/firebase/config';
+import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 /*
 Paleta de colores
@@ -56,7 +57,12 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode="none">
+      <Stack.Navigator 
+          headerMode="none"
+          screenOptions={{
+            // headerStyle: { elevation: 0 },
+            cardStyle: { backgroundColor: '#fff' }
+        }}>
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="Feed" component={Feed}/>
         <Stack.Screen name="Login" component={Login} />

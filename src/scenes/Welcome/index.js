@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     button: {
         width: 120,
         marginTop: 15,
-        marginRight: 30
+        marginRight: 30,
     },
     buttonContainer: {
         flexDirection: 'row-reverse',
