@@ -84,4 +84,4 @@ expo start
  - [Saúl Montes De Oca](https://github.com/saulmontesdeoca) - Front-end
  - [Diego Moreno Acevedo](https://github.com/DiegoMA1) - Front-end
  - [Victor Coeto](https://github.com/vcoeto) - Back-end
- - [Juan Carlos Hurtado](https://github.com/DiegoMA1) - Back-end.
+ - [Juan Carlos Hurtado](https://github.com/CarlosHurand) - Back-end.
