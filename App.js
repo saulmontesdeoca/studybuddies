@@ -8,6 +8,7 @@ import Login from './src/scenes/Login';
 import Signin from './src/scenes/Signin';
 import ChatRooms from './src/scenes/ChatRooms';
 import Welcome from './src/scenes/Welcome';
+import Form from './src/scenes/Form';
 import Profile from './src/scenes/Profile';
 import { firebase } from './src/firebase/config';
 import { DefaultTheme, DarkTheme } from '@react-navigation/native';
@@ -73,6 +74,8 @@ export default function App() {
         <Stack.Screen name="Profile">
           {props => <Profile {...props} user={userDB} />}
         </Stack.Screen>
+        <Stack.Screen name="Form" component={Form} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
