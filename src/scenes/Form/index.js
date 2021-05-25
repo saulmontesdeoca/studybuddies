@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {StyleSheet, Text, View, SafeAreaView, FlatList } from 'react-native'
+import {StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native'
 import RNPickerSelect from "react-native-picker-select";
 import { firebase } from '../../firebase/config';
 import { Chip } from 'react-native-elements';
-
-const Item = (name) => (
-    <View style={styles.item}>
-      <Text style={styles.title}>{name}</Text>
-    </View>
-  );
 
 const Form = ({ navigation }) => {
     const [myUni, setMyUni] = useState("");
@@ -31,28 +25,18 @@ const Form = ({ navigation }) => {
         })
         setUniversities(unis);
         setCareers(cars);
-        // console.log(cars);
-        // console.log(careers);
     }
-    // const getCareers = () => {
-    //     console.log("Careers " + careers[myUni]);
-    //     return (
-    //         <View style={styles.container}>
-    //             {careers[myUni].map( career => {
-    //                 <Text style={styles.salute}>{career}</Text>
-    //             })}
-    //         </View>
-    //     )
-    // }
+
     const getCareers = () => {
+        console.log(careers[myUni]);
+        const cars = ['TIC', 'KGG']
         return (
             <View>
                 <Text style={styles.titleCareers}>Choose you career:</Text>
                 <View style={{flexDirection: "row", flexWrap: "wrap", marginHorizontal: 30}}>
                 {careers[myUni].map((car, index) => {
-                    return <Chip style={{width: 70, margin: 2}} title={car} type="outline" onPress={ ({title}) => {
+                    return <Chip key={index} style={{width: 70, margin: 2}} title={car} type="outline" onPress={ ({title}) => {
                         setMyCareer(car);
-                        console.log(car);
                     }}/>
                 })}
                 </View>
@@ -64,23 +48,39 @@ const Form = ({ navigation }) => {
         getUniversities();
     }, []);
 
-    const renderItem = (name) => (
-        <Item title={name} />
-      );
-
     return (
         <SafeAreaView>
-            <Text style={styles.salute}>My school is</Text>
+            <Text style={styles.salute}>My school is 🎓</Text>
             <View style={styles.shadow}>
                 <View style={styles.input}>
                     <RNPickerSelect
                         placeholder={{ label: "Select your school", value: null }}
-                        onValueChange={ value => setMyUni(value)}
+                        onValueChange={ value => {
+                            setMyUni(value);
+                            setMyCareer('');
+                        }}
                         items={universities}
                     />
                 </View>
             </View>
             {myUni ? getCareers() : null}
+            {myCareer ? 
+                <View>
+                    <Text style={styles.titleCareers}>
+                        You selected {myCareer }
+                    </Text>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => navigation.navigate('SelectClasses',
+                        {
+                            myUni: myUni,
+                            myCareer: myCareer
+                        })}>
+                        <Text style={styles.buttonTitle}>Continue</Text>
+                    </TouchableOpacity>
+                </View>
+                : null
+            }
         </SafeAreaView>
     );
 };
@@ -89,6 +89,21 @@ export default Form;
 
 
 const styles = StyleSheet.create({
+    button: {
+        backgroundColor: '#C26DBC',
+        marginLeft: 30,
+        marginRight: 30,
+        marginTop: 20,
+        height: 48,
+        borderRadius: 100,
+        alignItems: "center",
+        justifyContent: 'center',
+    },
+    buttonTitle: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: "bold"
+    },
     input: {
         height: 48,
         borderRadius: 100,

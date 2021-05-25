@@ -109,7 +109,7 @@ const Signin = ({navigation}) => {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => navigation.navigate('Form')}>
-                    <Text style={styles.buttonTitle}>{'Form -> '}</Text>
+                    <Text style={styles.buttonTitle}>Boton provicional para ver Form</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
