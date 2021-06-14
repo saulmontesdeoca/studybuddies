@@ -101,15 +101,21 @@ const Signin = ({navigation}) => {
                         autoCapitalize="none"
                     />
                 </View>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     style={styles.button}
                     onPress={() => onRegisterPress()}>
                     <Text style={styles.buttonTitle}>Create account</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => navigation.navigate('Form')}>
-                    <Text style={styles.buttonTitle}>Boton provicional para ver Form</Text>
+                    onPress={() => navigation.navigate('Form',
+                        {
+                            fullName: fullName,
+                            email: email,
+                            password: password,
+                        }
+                    )}>
+                    <Text style={styles.buttonTitle}>Create account</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
@@ -158,6 +164,15 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         alignItems: "center",
         justifyContent: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.51,
+        shadowRadius: 13.16,
+        
+        elevation: 20,
     },
     buttonTitle: {
         color: 'white',

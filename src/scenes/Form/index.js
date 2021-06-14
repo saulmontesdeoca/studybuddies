@@ -4,11 +4,14 @@ import RNPickerSelect from "react-native-picker-select";
 import { firebase } from '../../firebase/config';
 import { Chip } from 'react-native-elements';
 
-const Form = ({ navigation }) => {
+const Form = ({ route, navigation }) => {
+    const { fullName, email, password } = route.params;
+
     const [myUni, setMyUni] = useState("");
     const [myCareer, setMyCareer] = useState("");
     const [universities, setUniversities] = useState([]);
     const [careers, setCareers] = useState({});
+    const [subjects, setSubjects] = useState([]);
 
     const getUniversities = async () => {
         const response = firebase.firestore().collection('universities');
@@ -28,8 +31,6 @@ const Form = ({ navigation }) => {
     }
 
     const getCareers = () => {
-        console.log(careers[myUni]);
-        const cars = ['TIC', 'KGG']
         return (
             <View>
                 <Text style={styles.titleCareers}>Choose you career:</Text>
@@ -37,11 +38,22 @@ const Form = ({ navigation }) => {
                 {careers[myUni].map((car, index) => {
                     return <Chip key={index} style={{width: 70, margin: 2}} title={car} type="outline" onPress={ ({title}) => {
                         setMyCareer(car);
+                        setSubj(car);
                     }}/>
                 })}
                 </View>
             </View>
         )
+    }
+
+    const setSubj = async (car) => {
+        const careersRef = firebase.firestore().collection('careers');
+        const data = await careersRef.where('name', '==', car).get();
+        let ids = [];
+        data.docs.forEach(doc => {
+            ids = doc.data().topicsID;
+        })
+        setSubjects(ids);
     }
 
     useEffect( () => {
@@ -67,14 +79,18 @@ const Form = ({ navigation }) => {
             {myCareer ? 
                 <View>
                     <Text style={styles.titleCareers}>
-                        You selected {myCareer }
+                        I'm in {myCareer }
                     </Text>
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => navigation.navigate('SelectClasses',
                         {
+                            fullName: fullName, 
+                            email: email, 
+                            password: password,
                             myUni: myUni,
-                            myCareer: myCareer
+                            myCareer: myCareer,
+                            subjects: subjects
                         })}>
                         <Text style={styles.buttonTitle}>Continue</Text>
                     </TouchableOpacity>
@@ -98,6 +114,15 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         alignItems: "center",
         justifyContent: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.51,
+        shadowRadius: 13.16,
+        
+        elevation: 20,
     },
     buttonTitle: {
         color: 'white',

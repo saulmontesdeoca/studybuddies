@@ -4,27 +4,45 @@ import { firebase } from '../../firebase/config';
 import { Chip } from 'react-native-elements';
 
 const SelectClasses = ({route, navigation}) => {
-    const { myUni, myCareer } = route.params;
+    const { fullName, email, password, myUni, myCareer, subjects } = route.params;
     const [myClasses, setMyClasses] = useState([]);
+    const [change, setChange] = useState(0);
     const [options, setOptions] = useState([]);
 
-    const getOptions = async () => {
-        const careersRef = firebase.firestore().collection('careers');
-        const data = await careersRef.where('name', '==', myCareer).get()
-            .then( car => {
-                car.forEach(doc => {
-                    setOptions(doc.data().topics);
-                });
-            })
 
-        // data.forEach(doc => {
-        //     setOptions([...options, doc.data().topics]);
-        // });
+    const onRegisterPress = () => {
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then((response) => {
+                const uid = response.user.uid
+                const data = {
+                    id: uid,
+                    fullName,
+                    email,
+                    myUni,
+                    myCareer,
+                    myClasses
+                };
+                console.log("This is what firebase will receive, user:", data);
+                const usersRef = firebase.firestore().collection('users')
+                usersRef
+                    .doc(uid)
+                    .set(data)
+                    .then(() => {
+                        navigation.navigate('Feed', {user: data})
+                    })
+                    .catch((error) => {
+                        alert(error)
+                    });
+            })
+            .catch((error) => {
+                alert(error)
+        });
     }
 
     useEffect( () => {
-        getOptions();
-        console.log(options);
+        setOptions(subjects);
     }, [myCareer]);
 
     return (
@@ -37,11 +55,11 @@ const SelectClasses = ({route, navigation}) => {
                     <Chip 
                         key={key}
                         style={{marginVertical: 3}}
-                        title={option}
+                        title={option.name}
                         type="outline"
                         onPress={({title})=> {
                             setOptions(options.filter((value, index, arr) => {
-                                return !(value===option)
+                                return !(value.name===option.name)
                             })); 
                             setMyClasses([...myClasses, option])
                         }}
@@ -56,10 +74,10 @@ const SelectClasses = ({route, navigation}) => {
                         <Chip 
                         style={{marginVertical: 3}}
                         key={key}
-                        title={myClass}
+                        title={myClass.name}
                         onPress={({title})=> {
                             setMyClasses(myClasses.filter((value, index, arr) => {
-                                return !(value===myClass)
+                                return !(value.name===myClass.name)
                             })); 
                             setOptions([...options, myClass])
                         }}
@@ -68,6 +86,17 @@ const SelectClasses = ({route, navigation}) => {
                 </View>
             </View>
             :null}
+            {
+                myClasses.length > 0 ?
+                <View>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => onRegisterPress()}>
+                        <Text style={styles.buttonTitle}>Find Study Buddies!</Text>
+                    </TouchableOpacity>
+                </View>
+                :null
+            }
         </SafeAreaView>
     );
 };
@@ -88,6 +117,15 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         alignItems: "center",
         justifyContent: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.51,
+        shadowRadius: 13.16,
+        
+        elevation: 20,
     },
     buttonTitle: {
         color: 'white',
