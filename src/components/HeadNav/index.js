@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View , StyleSheet, Image, ImageBackground} from 'react-native';
+import { Text, View , StyleSheet, Image, ImageBackground, Button} from 'react-native';
 
-const HeadNav = () => {
+const HeadNav = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View
@@ -23,9 +23,10 @@ const HeadNav = () => {
             <View
                 style={[styles.box]}
             >
+                <Button onPress={() => this.props.navigation.navigate('ChatRooms')} />
                 <Image
                     style={styles.messagesIcon}
-                    source={require('../../../assets/icons/messages.png')}
+                    source={require('../../../assets/icons/messages.png')}   
                 />
             </View>
         </View>

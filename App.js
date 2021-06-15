@@ -63,11 +63,12 @@ export default function App() {
             // headerStyle: { elevation: 0 },
             cardStyle: { backgroundColor: '#fff' }
         }}>
+        <Stack.Screen name="ChatRooms" component={ChatRooms} />
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="Feed" component={Feed}/>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signin" component={Signin} />
-        <Stack.Screen name="ChatRooms" component={ChatRooms} />
+        
         <Stack.Screen name="Profile">
           {props => <Profile {...props} user={userDB} />}
         </Stack.Screen>

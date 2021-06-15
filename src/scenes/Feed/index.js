@@ -251,7 +251,8 @@ const Feed = ({ navigation }) => {
             {openModals()}
             <View style={styles.containerTitle}>
                 {/* <Text style={styles.title}>Descubre 👾</Text> */}
-                <HeadNav/>
+                <HeadNav navigation={this.props.navigation}/> 
+
             </View>
             <View style={styles.deckContainer}>
                 <SwipeCards buddies={state.cards} user={state.userDB}/>
